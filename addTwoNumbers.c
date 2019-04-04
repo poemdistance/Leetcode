@@ -9,6 +9,9 @@ struct ListNode {
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
 
     struct ListNode Head;
+
+    /*ptr用于执行申请的内存空间
+     *current时刻指向链表末尾*/
     struct ListNode *ptr = NULL, *current = &Head; 
     
     int carry = 0, result;
@@ -31,9 +34,13 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
         current->next = ptr;
         current = ptr;
         
+        /*如果两个链表都到达末尾且最后没有进位
+         *注意这个语句不能放到最后,不然最后一位
+         会被忽略计算*/
         if( l1->next == l2->next && carry != 1)
             break;
         
+        /*链表到达末尾后,将对应Number的val置零*/
         if(l1->next != NULL) {
             l1 = l1->next;
             val1 = l1->val;
